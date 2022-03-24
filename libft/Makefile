@@ -6,7 +6,7 @@
 #    By: emende <emende@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 15:19:20 by emende            #+#    #+#              #
-#    Updated: 2022/01/16 21:05:18 by emende           ###   ########.fr        #
+#    Updated: 2022/03/24 16:05:25 by emende           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,22 +44,23 @@ RED = \033[0;31m
 LGRAY = \033[1;30m
 LGREEN = \033[1;32m
 WHITE = \033[1;37m
+NCOL = \033[0m
 
 all: $(NAME)
 
 $(NAME):
-	@echo "$(LGRAY)[LIBFT] $(LGREEN)Making objects..."
+	@echo "$(LGRAY)[LIBFT] $(LGREEN)Making objects...$(NCOL)"
 	@gcc $(CFLAG) $(INCLUDES) $(OPTIONS) $(SRCS)
-	@echo "$(LGRAY)[LIBFT] $(LGREEN)Crating library from object files..."
+	@echo "$(LGRAY)[LIBFT] $(LGREEN)Crating library from object files...$(NCOL)"
 	@ar rcs $(NAME) $(OBJS)
-	@echo "$(LGRAY)[LIBFT] $(LGREEN)Generated archive libft.a"
+	@echo "$(LGRAY)[LIBFT] $(LGREEN)Generated archive libft.a$(NCOL)"
 
 clean:
-	@echo "$(LGRAY)[LIBFT] $(RED)Cleaning object files..."
+	@echo "$(LGRAY)[LIBFT] $(RED)Cleaning object files...$(NCOL)"
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
-	@echo "$(LGRAY)[LIBFT] $(RED)Removing libft.a library file..."
+	@echo "$(LGRAY)[LIBFT] $(RED)Removing libft.a library file...$(NCOL)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all
