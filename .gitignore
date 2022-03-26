@@ -2,3 +2,9 @@ libft/*.o
 libft/*.a
 fdf
 *.o
+mlx/*.o
+mlx/*.dylib
+mlx/*.swiftdoc
+mlx/*.swiftmodule
+.DS_Store
+*/.DS_Store
