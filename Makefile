@@ -6,7 +6,7 @@
 #    By: emende <emende@student.42.fr>              +#+  +:+       +#+         #
 :#                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 12:46:17 by emende            #+#    #+#              #
-#    Updated: 2022/03/26 21:51:19 by emende           ###   ########.fr        #
+#    Updated: 2022/03/26 22:58:20 by emende           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I libft/includes -L libft -lft
 MLX_INCL = -I minilibx -L minilibx -lmlx
 MLX_SCHOOL = -I /usr/local/include -L /usr/local/lib -lmlx
-MLX_MAC = -I mlx -Lmlx -lmlx
 FRAMEWORKS = -framework OpenGL -framework AppKit
 #SRCS_DIR = srcs/
 #SCRS_LIST = main.c
@@ -30,7 +29,7 @@ all:  $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
-	$(CC) -o $(NAME) $(OBJS) $(MLX_INCL) $(LIBFT_INCL) $(FRAMEWORKS)
+	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(LIBFT_INCL) $(FRAMEWORKS)
 
 clean:
 	make clean -C libft/

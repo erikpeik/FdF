@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/03/26 23:42:24 by emende           ###   ########.fr       */
+/*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
+/*   Updated: 2022/03/26 23:39:01 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include "libft.h"
-# include "mlx.h"
-
-typedef struct s_data {
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}				t_data;
-
-void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-#endif
+int	draw_line(void *mlx_ptr, void *win_ptr, int BeginX, int BeginY, 
+	int endX, int endY, int color)
+{
+	return (0);
+}
