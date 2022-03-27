@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/03/26 23:42:24 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/27 21:15:39 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include <math.h>
 
 typedef struct s_data {
 	void	*img;
@@ -24,6 +25,14 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_line {
+	int	begin_x;
+	int	begin_y;
+	int	end_x;
+	int	end_y;
+}				t_line;
+
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	draw_line(t_data *img, t_line line, int color);
 
 #endif

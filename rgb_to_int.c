@@ -6,11 +6,9 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 22:59:15 by emende            #+#    #+#             */
-/*   Updated: 2022/03/26 23:41:26 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/27 16:16:26 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	rgb_to_int2(double r, double g, double b)
 {

@@ -6,7 +6,7 @@
 #    By: emende <emende@student.42.fr>              +#+  +:+       +#+         #
 :#                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 12:46:17 by emende            #+#    #+#              #
-#    Updated: 2022/03/26 22:58:20 by emende           ###   ########.fr        #
+#    Updated: 2022/03/27 18:39:18 by emende           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FRAMEWORKS = -framework OpenGL -framework AppKit
 #SRCS_DIR = srcs/
 #SCRS_LIST = main.c
 #SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
-OBJS = main.o ft_mlx_pixel_put.o
+OBJS = main.o ft_mlx_pixel_put.o draw_line.o
 
 all:  $(NAME)
 
