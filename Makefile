@@ -29,7 +29,7 @@ all:  $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
-	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(LIBFT_INCL) $(FRAMEWORKS)
+	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(CPPFLAGS) $(FRAMEWORKS)
 
 clean:
 	make clean -C libft/
