@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:00:48 by emende            #+#    #+#             */
-/*   Updated: 2021/12/27 14:10:09 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/28 17:50:13 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int		ft_isspace(int c);
 int		ft_ispunct(int c);
 char	*ft_strrev(char *s);
 char	*ft_strndup(const char *s1, size_t n);
+int		ft_abs(int i);
 
 #endif
