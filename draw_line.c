@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/03/27 21:20:38 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/28 14:00:55 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	draw_line(t_data *img, t_line line, int color)
 	delta_y /= pixels;
 	pixel_x = line.begin_x;
 	pixel_y = line.begin_y;
-	while (pixels)
+	while (pixels > 0)
 	{
 		ft_mlx_pixel_put(img, pixel_x, pixel_y, color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
-		--pixels;
+		pixels -= 1;
 	}
 }
