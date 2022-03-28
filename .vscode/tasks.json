@@ -18,8 +18,8 @@
 				"-framework",
 				"AppKit",
 				"${file}",
-				"draw_line.c",
-				"ft_mlx_pixel_put.c",
+				"${fileDirname}/draw_line.c",
+				"${fileDirname}/ft_mlx_pixel_put.c",
 				"-o",
 				"${fileDirname}/fdf"
 			],
