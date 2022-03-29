@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/03/28 17:59:14 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/29 10:44:10 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <math.h>
 
 # define W_WIDTH 400
-# define W_HEIGHT 300
+# define W_HEIGHT 250
 
 typedef struct s_data {
 	void	*img;
