@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/03/29 10:44:10 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/30 14:23:45 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "mlx.h"
 # include <math.h>
 
-# define W_WIDTH 400
-# define W_HEIGHT 250
+# define W_WIDTH 500
+# define W_HEIGHT 300
 
 typedef struct s_data {
 	void	*img;
@@ -33,6 +33,8 @@ typedef struct s_line {
 	int	begin_y;
 	int	end_x;
 	int	end_y;
+	int	delta_x;
+	int	delta_y;
 }				t_line;
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);

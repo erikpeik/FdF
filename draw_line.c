@@ -6,40 +6,79 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/03/29 10:56:18 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/30 14:48:18 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line(t_data *img, t_line line, int color)
+static void	draw_x(t_data *img, t_line line, int color)
 {
-	int	delta_x;
-	int	delta_y;
-	int presicion;
-/*	int x_ofs;
-	int y_ofs; */
+	int	presicion;
+	int	x_ofs;
+	int	y_ofs;
 
-	delta_x = line.end_x - line.begin_x;
-	delta_y = line.end_y - line.begin_y;
-
-	presicion = 2 * delta_y - delta_x;
+	if (line.delta_x < 0)
+		x_ofs = -1;
+	else
+		x_ofs = 1;
+	if (line.delta_y < 0)
+		y_ofs = -1;
+	else
+		y_ofs = 1;
+	presicion = 2 * ft_abs(line.delta_y) - line.delta_x;
 	while (line.begin_x < line.end_x)
 	{
-		if (presicion >= 0)
-		{
-			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
-			line.begin_y += 1;
-			presicion = presicion + 2 * delta_y - 2 * delta_x;
-
-		}
+		ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (presicion < 0)
+			presicion = presicion + 2 * ft_abs(line.delta_y);
 		else
 		{
-			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
-			presicion = presicion + 2 * delta_y;
+			presicion = presicion + 2 * ft_abs(line.delta_y) - 2 * line.delta_x;
+			line.begin_y += y_ofs;
 		}
-		line.begin_x += 1;
+		line.begin_x += x_ofs;
 	}
+}
+
+static void draw_y(t_data *img, t_line line, int color)
+{
+	int	presicion;
+	int	x_ofs;
+	int	y_ofs;
+
+	if (line.delta_x < 0)
+		x_ofs = -1;
+	else
+		x_ofs = 1;
+	if (line.delta_y < 0)
+		y_ofs = -1;
+	else
+		y_ofs = 1;
+	presicion = 2 * ft_abs(line.delta_x) - line.delta_y;
+	while (line.begin_y < line.end_y)
+	{
+		ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (presicion < 0)
+			presicion = presicion + 2 * ft_abs(line.delta_y);
+		else
+		{
+			presicion = presicion + 2 * ft_abs(line.delta_x) - 2 * line.delta_y;
+			line.begin_x += x_ofs;
+		}
+		line.begin_y += x_ofs;
+	}
+}
+
+void	draw_line(t_data *img, t_line line, int color)
+{
+	line.delta_x = line.end_x - line.begin_x;
+	line.delta_y = line.end_y - line.begin_y;
+
+	if (ft_abs(line.delta_x) >= ft_abs(line.delta_y))
+		draw_x(img, line, color);
+	else
+		draw_y(img, line, color);
 }
 
 /*
