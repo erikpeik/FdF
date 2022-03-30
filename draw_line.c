@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/03/30 14:48:18 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/30 21:13:51 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_x(t_data *img, t_line line, int color)
 			presicion = presicion + 2 * ft_abs(line.delta_y);
 		else
 		{
-			presicion = presicion + 2 * ft_abs(line.delta_y) - 2 * line.delta_x;
+			presicion += 2 * ft_abs(line.delta_y) - 2 * ft_abs(line.delta_x);
 			line.begin_y += y_ofs;
 		}
 		line.begin_x += x_ofs;
@@ -47,6 +47,7 @@ static void draw_y(t_data *img, t_line line, int color)
 	int	x_ofs;
 	int	y_ofs;
 
+	write(1, "y", 1);
 	if (line.delta_x < 0)
 		x_ofs = -1;
 	else
@@ -63,10 +64,10 @@ static void draw_y(t_data *img, t_line line, int color)
 			presicion = presicion + 2 * ft_abs(line.delta_y);
 		else
 		{
-			presicion = presicion + 2 * ft_abs(line.delta_x) - 2 * line.delta_y;
-			line.begin_x += x_ofs;
+			presicion += 2 * ft_abs(line.delta_x) - 2 * ft_abs(line.delta_y);
+			line.begin_x += y_ofs;
 		}
-		line.begin_y += x_ofs;
+		line.begin_y += y_ofs;
 	}
 }
 
