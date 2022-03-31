@@ -6,34 +6,13 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/03/31 13:58:23 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/31 15:33:30 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	panic(char	*msg, t_vars *v)
-{
-	ft_putstr_fd(msg, 2);
-	if (v->mlx_ptr && v->data.img)
-		mlx_destroy_image(v->mlx_ptr, v->data.img);
-	if (v->mlx_ptr && v->win_ptr)
-		mlx_destroy_window(v->mlx_ptr, v->win_ptr);
-	if (v)
-		free(v);
-	exit (0);
-}
-
-int	hook_key(int keycode, t_vars *v)
-{
-	ft_putnbr(keycode);
-	ft_putchar('\n');
-	if (keycode == 53)
-		panic("", v);
-	return (0);
-}
-
-t_vars	*set_vars(void)
+static t_vars	*set_vars(void)
 {
 	t_vars	*v;
 
