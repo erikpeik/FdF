@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/03/30 22:46:32 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/31 12:16:16 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ typedef struct s_line {
 	int	delta_x;
 	int	delta_y;
 }				t_line;
+
+typedef struct s_vars {
+	void			*mlx_ptr;
+	void			*win_ptr;
+	struct s_line	line;
+	struct s_data	data;
+}				t_vars;
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *img, t_line line, int color);
