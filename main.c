@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/03/31 13:01:07 by emende           ###   ########.fr       */
+/*   Updated: 2022/03/31 13:55:49 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,25 @@ int	hook_key(int keycode, t_vars *v)
 			mlx_destroy_image(v->mlx_ptr, v->data.img);
 		if (v->mlx_ptr && v->win_ptr)
 			mlx_destroy_window(v->mlx_ptr, v->win_ptr);
+		if (v)
+			free(v);
 		exit (-1);
 	}
 	return (0);
 }
 
-t_vars	*set_vars()
-{}
+t_vars	*set_vars(void)
+{
+	t_vars	*v;
+
+	v = (t_vars *) malloc(sizeof (t_vars));
+	v->mlx_ptr = mlx_init();
+	v->win_ptr = mlx_new_window(v->mlx_ptr, W_WIDTH, W_HEIGHT, "FdF");
+	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH, W_HEIGHT);
+	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
+			&v->data.line_len, &v->data.endian);
+	return (v);
+}
 
 int	main(void)
 {
@@ -42,11 +54,6 @@ int	main(void)
 	int		temp;
 
 	v = set_vars();
-	v->mlx_ptr = mlx_init();
-	v->win_ptr = mlx_new_window(v->mlx_ptr, W_WIDTH, W_HEIGHT, "FdF");
-	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH, W_HEIGHT);
-	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
-			&v->data.line_len, &v->data.endian);
 	v->line.begin_x = W_WIDTH / 2;
 	v->line.begin_y = W_HEIGHT / 2;
 	temp = 0;
@@ -81,6 +88,8 @@ int	main(void)
 		draw_line(&v->data, v->line, 0xFFFFFF);
 		temp -= 50;
 	}
-//	draw_line(&img, line, 0xFFFFFF);
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
+	mlx_key_hook(v->win_ptr, hook_key, v);
+	mlx_loop(v->mlx_ptr);
 	return (0);
 }
