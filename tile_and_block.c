@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 17:42:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/01 17:45:07 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/01 19:52:04 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_block(t_vars *v, int x, int y, int z)
 
 	color = 0xFFFFFF;
 	v->line.begin_x = W_WIDTH / 2 + ((TILE_W / 2) * (x - y));
-	v->line.begin_y = ((TILE_H * 1.5) + (TILE_H / 2 * (x + y))) - (z * TILE_H);
+	v->line.begin_y = (TILE_H * 3 / 2) + (TILE_H / 2 * (x + y)) - (z * TILE_H);
 	v->line.end_x = v->line.begin_x - (TILE_W / 2);
 	v->line.end_y = v->line.begin_y + (TILE_H / 2);
 	draw_line(&v->data, v->line, color);

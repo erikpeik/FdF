@@ -6,13 +6,13 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/03/31 15:33:37 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/01 19:03:48 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	panic(char	*msg, t_vars *v)
+void	panic(char	*msg, t_vars *v)
 {
 	ft_putstr_fd(msg, 2);
 	if (v)
