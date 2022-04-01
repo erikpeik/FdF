@@ -12,7 +12,7 @@
 
 NAME = fdf
 CC = gcc
-CFLAGS = -Wall -Wextra -Wconversion # -Werror
+CFLAGS = -Wall -Wextra #-fsanitize=address -g -Wconversion  -Werror
 CPPFLAGS = -I libft/includes -L libft -lft
 MLX_INCL = -I minilibx -L minilibx -lmlx
 MLX_SCHOOL = -I /usr/local/include -L /usr/local/lib -lmlx
