@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/03/31 15:33:30 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/01 17:41:03 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,13 @@ int	main(void)
 	int		temp;
 
 	v = set_vars();
-	v->line.begin_x = W_WIDTH / 2;
-	v->line.begin_y = W_HEIGHT / 2;
-	temp = 0;
-	v->line.end_y = 0;
-	while (temp <= W_WIDTH)
-	{
-		v->line.end_x = temp;
-		draw_line(&v->data, v->line, 0xFFFFFF);
-		temp += 50;
-	}
-	temp = 50;
-	v->line.end_x = W_WIDTH;
-	while (temp <= W_HEIGHT)
-	{
-		v->line.end_y = temp;
-		draw_line(&v->data, v->line, 0xFFFFFF);
-		temp += 50;
-	}
-	temp = W_WIDTH - 50;
-	v->line.end_y = W_HEIGHT;
-	while (temp >= 0)
-	{
-		v->line.end_x = temp;
-		draw_line(&v->data, v->line, 0xFFFFFF);
-		temp -= 50;
-	}
-	temp = W_HEIGHT - 50;
-	v->line.end_x = 0;
-	while (temp >= 0)
-	{
-		v->line.end_y = temp;
-		draw_line(&v->data, v->line, 0xFFFFFF);
-		temp -= 50;
-	}
+/*	for (int x = 0; x < 15; x++)
+		for (int y = 0; y < 15; y++)
+			drawTile(v, x, y, 0xFFFFFF); */
+	draw_block(v, 0, 0, 1);
+	draw_block(v, 0, 0, 0);
+	draw_block(v, 0, 1, 0);
+	draw_block(v, 1, 0, 0);
 	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
 	mlx_key_hook(v->win_ptr, hook_key, v);
 	mlx_loop(v->mlx_ptr);
