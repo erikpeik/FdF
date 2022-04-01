@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:00:48 by emende            #+#    #+#             */
-/*   Updated: 2022/03/30 21:53:56 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/01 19:50:23 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ char	*ft_strrev(char *s);
 char	*ft_strndup(const char *s1, size_t n);
 int		ft_abs(int i);
 void	ft_swap(int *a, int *b);
+size_t	ft_arrlen(const void **arr);
 
 #endif
