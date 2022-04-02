@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/03/30 22:54:23 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 20:09:07 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ static void	draw_x(t_data *img, t_line line, int color)
 	i = -1;
 	while (++i < ft_abs(line.delta_x))
 	{
-		ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (line.begin_x > 0 && line.begin_x <= W_WIDTH
+			&& line.begin_y > 0 && line.begin_y <= W_HEIGHT)
+			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_y);
 		else
@@ -60,7 +62,9 @@ static void	draw_y(t_data *img, t_line line, int color)
 	i = -1;
 	while (++i < ft_abs(line.delta_y))
 	{
-		ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (line.begin_x > 0 && line.begin_x <= W_WIDTH
+			&& line.begin_y > 0 && line.begin_y <= W_HEIGHT)
+			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_x);
 		else
