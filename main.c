@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/01 21:56:08 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 13:02:05 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ static int **altitudes_to_array(int row, int col, char *argv)
 	i = 0;
 	while (i < row)
 	{
-		points[i] = (int *) malloc(sizeof(int) * col);
 		ret = get_next_line(fd, &line);
 		if (ret < 1)
 			panic("error: get_next_line broken\n", NULL);
@@ -145,7 +144,6 @@ int	**read_values(int fd, char *argv)
 	ft_putchar('\n');
 	ft_putnbr(nums_line);
 	ft_putchar('\n');
-	system("leaks fdf");
 	return (points);
 }
 
@@ -162,6 +160,7 @@ int	main(int argc, char **argv)
 		panic("error: Open failed. No such file or directory.\n", NULL);
 	points = read_values(fd, argv[1]);
 	free_intarr(points, 9);
+	system("leaks fdf");
 	v = set_vars();
 /*	draw_block(v, 0, 0, 0); */
 	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
