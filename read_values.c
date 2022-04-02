@@ -6,25 +6,25 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 13:27:03 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 18:37:54 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	update_count(int *row_count, int *nums_line, int fd)
+static void	update_count(t_vars *v, int fd)
 {
 	int		ret;
 	char	*line;
 	char	**split;
 
-	*row_count = 0;
+	v->row_count = 0;
 	ret = get_next_line(fd, &line);
 	if (ret < 1)
-		panic("error: File was empty or directory\n", NULL);
+		panic("error: File was empty or directory\n", v);
 	split = ft_strsplit(line, ' ');
 	free(line);
-	*nums_line = (int) ft_arrlen((const void **) split) - 1;
+	v->col_count = (int) ft_arrlen((const void **) split) - 1;
 	free_strarr(split);
 	while (ret)
 	{
@@ -34,10 +34,10 @@ static void	update_count(int *row_count, int *nums_line, int fd)
 			split = ft_strsplit((char const *) line, ' ');
 			ft_strdel(&line);
 			free_strarr(split);
-			if ((ft_arrlen((const void **) split) - 1) != (size_t) *(nums_line))
-				panic("error: Differences on lines.\n", NULL);
+			if ((ft_arrlen((const void **) split) - 1) != (size_t) v->col_count)
+				panic("error: Differences on lines.\n", v);
 		}
-		(*row_count)++;
+		v->row_count++;
 	}
 }
 
@@ -72,7 +72,7 @@ static int	**altitudes_to_array(int row, int col, char *argv)
 	while (i < row)
 	{
 		if (get_next_line(fd, &line) < 1)
-			panic("error: get_next_line broken\n", NULL);
+			panic("error: get_next_line error\n", NULL);
 		splits = ft_strsplit((char const *) line, ' ');
 		ft_strdel(&line);
 		points[i] = atoi_splits(splits, col);
@@ -82,12 +82,37 @@ static int	**altitudes_to_array(int row, int col, char *argv)
 	return (points);
 }
 
+static void	count_altitudes(t_vars *v, int **points)
+{
+	int	row;
+	int	col;
+
+	v->max_altitude = points[0][0];
+	v->min_altitude = points[0][0];
+	row = -1;
+	while (++row < v->row_count)
+	{
+		col = -1;
+		while (++col < v->col_count)
+		{
+			if (points[row][col] > v->max_altitude)
+				v->max_altitude = points[row][col];
+			if (points[row][col] > v->max_altitude)
+				v->min_altitude = points[row][col];
+		}
+	}
+}
+
 int	**read_values(int fd, char *argv, t_vars *v)
 {
 	int		**points;
 
-
-	update_count(&v->row_count, &v->col_count, fd);
+	update_count(v, fd);
 	points = altitudes_to_array(v->row_count, v->col_count, argv);
+	count_altitudes(v, points);
+	ft_putnbr(v->max_altitude);
+	ft_putchar('\n');
+	ft_putnbr(v->min_altitude);
+	ft_putchar('\n');
 	return (points);
 }

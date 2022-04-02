@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 14:08:43 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 20:09:34 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 
 # define W_WIDTH 2000
-# define W_HEIGHT 1400
+# define W_HEIGHT 1200
 
 # define TILE_W 100
 # define TILE_H 50
@@ -42,12 +42,13 @@ typedef struct s_line {
 	int	delta_y;
 }				t_line;
 
-
 typedef struct s_vars {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int				row_count;
 	int				col_count;
+	int				max_altitude;
+	int				min_altitude;
 	struct s_line	line;
 	struct s_data	data;
 	int				**points;
