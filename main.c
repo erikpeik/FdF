@@ -19,7 +19,7 @@ static t_vars	*set_vars(void)
 	v = (t_vars *) malloc(sizeof (t_vars));
 	v->mlx_ptr = mlx_init();
 	v->win_ptr = mlx_new_window(v->mlx_ptr, W_WIDTH, W_HEIGHT, "FdF");
-	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH, W_HEIGHT);
+	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH * 2, W_HEIGHT * 2);
 	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
 			&v->data.line_len, &v->data.endian);
 	return (v);
@@ -80,9 +80,9 @@ int	main(int argc, char **argv)
 		while (x < v->col_count)
 		{
 			v->line.begin_x = W_WIDTH / 2 + ((TILE_W / 2) * (x - y));
-			v->line.begin_y = TILE_H * 2 + (TILE_H / 2 * (x - y)) - (points[y][x] * TILE_H);
+			v->line.begin_y = W_HEIGHT / 4 + ((TILE_H / 2) * (x + y)) - (points[y][x] * 5);
 			v->line.end_x = v->line.begin_x + (TILE_W / 2);
-			v->line.end_y = TILE_H * 2 + (TILE_H / 2 * ((x + 1) - y)) - (points[y][x + 1] * TILE_H);
+			v->line.end_y = W_HEIGHT / 4 + ((TILE_H / 2) * ((x + 1) + y)) - (points[y][x + 1] * 5);
 			draw_line(&v->data, v->line, 0xFFFFFF);
 			x++;
 		}

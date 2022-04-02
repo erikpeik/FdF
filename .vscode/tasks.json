@@ -21,6 +21,8 @@
 				"${fileDirname}/draw_line.c",
 				"${fileDirname}/ft_mlx_pixel_put.c",
 				"${fileDirname}/hook_key.c",
+				"${fileDirname}/free_arrays.c",
+				"${fileDirname}/read_values.c",
 				"-o",
 				"${fileDirname}/fdf"
 			],

@@ -19,8 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define W_WIDTH 1900
-# define W_HEIGHT 1100
+# define W_WIDTH 2000
+# define W_HEIGHT 1400
 
 # define TILE_W 100
 # define TILE_H 50
