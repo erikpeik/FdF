@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 20:09:07 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 20:52:55 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ static void	draw_x(t_data *img, t_line line, int color)
 	i = -1;
 	while (++i < ft_abs(line.delta_x))
 	{
-		if (line.begin_x > 0 && line.begin_x <= W_WIDTH
-			&& line.begin_y > 0 && line.begin_y <= W_HEIGHT)
-			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (line.x0 > 0 && line.x0 <= W_WIDTH
+			&& line.y0 > 0 && line.y0 <= W_HEIGHT)
+			ft_mlx_pixel_put(img, line.x0, line.y0, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_y);
 		else
 		{
 			presicion += 2 * ft_abs(line.delta_y) - 2 * ft_abs(line.delta_x);
-			line.begin_y += y_ofs;
+			line.y0 += y_ofs;
 		}
-		line.begin_x += x_ofs;
+		line.x0 += x_ofs;
 	}
 }
 
@@ -62,24 +62,24 @@ static void	draw_y(t_data *img, t_line line, int color)
 	i = -1;
 	while (++i < ft_abs(line.delta_y))
 	{
-		if (line.begin_x > 0 && line.begin_x <= W_WIDTH
-			&& line.begin_y > 0 && line.begin_y <= W_HEIGHT)
-			ft_mlx_pixel_put(img, line.begin_x, line.begin_y, color);
+		if (line.x0 > 0 && line.x0 <= W_WIDTH
+			&& line.y0 > 0 && line.y0 <= W_HEIGHT)
+			ft_mlx_pixel_put(img, line.x0, line.y0, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_x);
 		else
 		{
 			presicion += 2 * ft_abs(line.delta_x) - 2 * ft_abs(line.delta_y);
-			line.begin_x += x_ofs;
+			line.x0 += x_ofs;
 		}
-		line.begin_y += y_ofs;
+		line.y0 += y_ofs;
 	}
 }
 
 void	draw_line(t_data *img, t_line line, int color)
 {
-	line.delta_x = line.end_x - line.begin_x;
-	line.delta_y = line.end_y - line.begin_y;
+	line.delta_x = line.x1 - line.x0;
+	line.delta_y = line.y1 - line.y0;
 	if (ft_abs(line.delta_x) >= ft_abs(line.delta_y))
 		draw_x(img, line, color);
 	else

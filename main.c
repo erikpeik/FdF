@@ -6,13 +6,13 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 20:10:40 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 23:19:42 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_vars	*set_vars(void)
+static t_vars	*set_vars(char *argv, int fd)
 {
 	t_vars	*v;
 
@@ -21,7 +21,15 @@ static t_vars	*set_vars(void)
 	v->win_ptr = mlx_new_window(v->mlx_ptr, W_WIDTH, W_HEIGHT, "FdF");
 	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH * 2, W_HEIGHT * 2);
 	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
-			&v->data.line_len, &v->data.endian);
+		&v->data.line_len, &v->data.endian);
+	v->arr = read_values(fd, argv, v);
+	v->x_ofs = W_WIDTH / 2;
+	v->tile_w = W_WIDTH / v->col_count;
+	if (v->tile_w % 2 != 0)
+		v->tile_w--;
+	v->tile_h = v->tile_w / 2;
+	v->y_ofs = W_HEIGHT / v->col_count + 100;
+	v->z_ofs = (v->max_altitude - v->min_altitude);
 	return (v);
 }
 
@@ -47,39 +55,33 @@ static void	print_intarr(int **points, int row_count, int col_count)
 	}
 }
 
-void	draw_iso(t_vars *v, int **points)
+int	upd_col(int point1, int point2, t_vars *v)
 {
-	int		x;
-	int		y;
-	int		color;
+	if (point1 != 0 || point2 != 0)
+		v->color = 0xFF0000;
+	else
+		v->color = 0xFFFFFF;
+	return (1);
+}
 
-	y = 0;
+void	draw_iso(t_vars *v, int x, int y)
+{
 	while (y < v->row_count)
 	{
 		x = 0;
 		while (x <= v->col_count)
 		{
-			v->line.begin_x = W_WIDTH / 2 + ((TILE_W / 2) * (x - y));
-			v->line.begin_y = W_HEIGHT / 4 + ((TILE_H / 2) * (x + y)) - (points[y][x] * 20);
-			v->line.end_x = v->line.begin_x + (TILE_W / 2);
-			v->line.end_y = W_HEIGHT / 4 + ((TILE_H / 2) * ((x + 1) + y)) - (points[y][x + 1] * 20);
-			if (x < v->col_count)
+			v->line.x0 = v->x_ofs + ((v->tile_w / 2) * (x - y));
+			v->line.y0 = v->y_ofs + ((v->tile_h / 2) * (x + y)) - (v->arr[y][x] * v->z_ofs);
+			v->line.x1 = v->line.x0 + (v->tile_w / 2);
+			v->line.y1 = v->y_ofs + ((v->tile_h / 2) * ((x + 1) + y)) - (v->arr[y][x + 1] * v->z_ofs);
+			if (x < v->col_count && upd_col(v->arr[y][x], v->arr[y][x + 1], v))
+				draw_line(&v->data, v->line, v->color);
+			if (y < v->row_count - 1 && upd_col(v->arr[y][x], v->arr[y + 1][x], v))
 			{
-				if (points[y][x] > 0 || points[y][x + 1] > 0)
-					color = 0xFF0000;
-				else
-					color = 0xFFFFFF;
-				draw_line(&v->data, v->line, color);
-			}
-			if (y < v->row_count - 1)
-			{
-				v->line.end_x -= TILE_W;
-				v->line.end_y = W_HEIGHT / 4 + (TILE_H / 2) * (x + (y + 1)) - (points[y + 1][x] * 20);
-				if (points[y][x] > 0 || points[y + 1][x] > 0)
-					color = 0xFF0000;
-				else
-					color = 0xFFFFFF;
-				draw_line(&v->data, v->line, color);
+				v->line.x1 -= v->tile_w;
+				v->line.y1 = v->y_ofs + (v->tile_h / 2) * (x + (y + 1)) - (v->arr[y + 1][x] * v->z_ofs);
+				draw_line(&v->data, v->line, v->color);
 			}
 			x++;
 		}
@@ -87,10 +89,18 @@ void	draw_iso(t_vars *v, int **points)
 	}
 }
 
+void	image_to_display(t_vars *v)
+{
+	draw_iso(v, 0, 0);
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
+//	mlx_key_hook(v->win_ptr, hook_key, v);
+	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
+	mlx_loop(v->mlx_ptr);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	*v;
-	int		**points;
 	int		fd;
 
 	if (argc != 2)
@@ -98,22 +108,17 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		panic("error: Open failed. No such file or directory.\n", NULL);
-	v = set_vars();
-	points = read_values(fd, argv[1], v);
+	v = set_vars(argv[1], fd);
 /*	ft_putnbr(v->row_count);
 	ft_putchar('\n');
 	ft_putnbr(v->nums_line);
 	ft_putchar('\n'); */
-	print_intarr(points, v->row_count, v->col_count);
-	draw_iso(v, points);
-	free_intarr(points, 9);
-/*	system("leaks fdf"); */
-/*	draw_block(v, 0, 0, 0);
-	draw_block(v, 1, 0, 0);
-	draw_block(v, 0, 1, 0);
-	draw_block(v, 0, 0, 1); */
+/*	print_intarr(v->arr, v->row_count, v->col_count); */
+	mlx_clear_window(v->mlx_ptr, v->win_ptr);
+	image_to_display(v);
+/*	draw_iso(v, 0, 0);
 	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
 	mlx_key_hook(v->win_ptr, hook_key, v);
-	mlx_loop(v->mlx_ptr);
+	mlx_loop(v->mlx_ptr);*/
 	return (0);
 }

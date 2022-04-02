@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 18:37:54 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 23:01:10 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	update_count(t_vars *v, int fd)
 		}
 		v->row_count++;
 	}
+	close(fd);
 }
 
 static int	*atoi_splits(char **splits, int col)
@@ -79,6 +80,7 @@ static int	**altitudes_to_array(int row, int col, char *argv)
 		free_strarr(splits);
 		i++;
 	}
+	close(fd);
 	return (points);
 }
 
