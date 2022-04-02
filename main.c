@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 14:33:42 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 20:10:40 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_vars	*set_vars(void)
 			&v->data.line_len, &v->data.endian);
 	return (v);
 }
-
 
 static void	print_intarr(int **points, int row_count, int col_count)
 {
@@ -48,9 +47,44 @@ static void	print_intarr(int **points, int row_count, int col_count)
 	}
 }
 
-void draw_iso(t_vars *v)
+void	draw_iso(t_vars *v, int **points)
 {
+	int		x;
+	int		y;
+	int		color;
 
+	y = 0;
+	while (y < v->row_count)
+	{
+		x = 0;
+		while (x <= v->col_count)
+		{
+			v->line.begin_x = W_WIDTH / 2 + ((TILE_W / 2) * (x - y));
+			v->line.begin_y = W_HEIGHT / 4 + ((TILE_H / 2) * (x + y)) - (points[y][x] * 20);
+			v->line.end_x = v->line.begin_x + (TILE_W / 2);
+			v->line.end_y = W_HEIGHT / 4 + ((TILE_H / 2) * ((x + 1) + y)) - (points[y][x + 1] * 20);
+			if (x < v->col_count)
+			{
+				if (points[y][x] > 0 || points[y][x + 1] > 0)
+					color = 0xFF0000;
+				else
+					color = 0xFFFFFF;
+				draw_line(&v->data, v->line, color);
+			}
+			if (y < v->row_count - 1)
+			{
+				v->line.end_x -= TILE_W;
+				v->line.end_y = W_HEIGHT / 4 + (TILE_H / 2) * (x + (y + 1)) - (points[y + 1][x] * 20);
+				if (points[y][x] > 0 || points[y + 1][x] > 0)
+					color = 0xFF0000;
+				else
+					color = 0xFFFFFF;
+				draw_line(&v->data, v->line, color);
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -58,8 +92,6 @@ int	main(int argc, char **argv)
 	t_vars	*v;
 	int		**points;
 	int		fd;
-	int		x;
-	int		y;
 
 	if (argc != 2)
 		panic("usage: ./fdf source_file\n", NULL);
@@ -73,23 +105,7 @@ int	main(int argc, char **argv)
 	ft_putnbr(v->nums_line);
 	ft_putchar('\n'); */
 	print_intarr(points, v->row_count, v->col_count);
-	y = 0;
-	while (y < v->row_count)
-	{
-		x = 0;
-		while (x < v->col_count)
-		{
-			v->line.begin_x = W_WIDTH / 2 + ((TILE_W / 2) * (x - y));
-			v->line.begin_y = W_HEIGHT / 4 + ((TILE_H / 2) * (x + y)) - (points[y][x] * 5);
-			v->line.end_x = v->line.begin_x + (TILE_W / 2);
-			v->line.end_y = W_HEIGHT / 4 + ((TILE_H / 2) * ((x + 1) + y)) - (points[y][x + 1] * 5);
-			draw_line(&v->data, v->line, 0xFFFFFF);
-			x++;
-		}
-		y++;
-	}
-
-
+	draw_iso(v, points);
 	free_intarr(points, 9);
 /*	system("leaks fdf"); */
 /*	draw_block(v, 0, 0, 0);
