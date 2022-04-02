@@ -19,8 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define W_WIDTH 2000
-# define W_HEIGHT 1200
+# define W_WIDTH 1400
+# define W_HEIGHT 800
 
 typedef struct s_data {
 	void	*img;

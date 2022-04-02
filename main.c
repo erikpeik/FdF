@@ -24,9 +24,9 @@ static t_vars	*set_vars(char *argv, int fd)
 		&v->data.line_len, &v->data.endian);
 	v->arr = read_values(fd, argv, v);
 	v->x_ofs = W_WIDTH / 2;
-	v->tile_w = W_WIDTH / v->col_count;
-	if (v->tile_w % 2 != 0)
-		v->tile_w--;
+	v->tile_w = 50;
+/*	if (v->tile_w % 2 != 0 || v->tile_w < 4)
+		v->tile_w++; */
 	v->tile_h = v->tile_w / 2;
 	v->y_ofs = W_HEIGHT / v->col_count + 100;
 	v->z_ofs = (v->max_altitude - v->min_altitude);
@@ -93,9 +93,9 @@ void	image_to_display(t_vars *v)
 {
 	draw_iso(v, 0, 0);
 	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
-//	mlx_key_hook(v->win_ptr, hook_key, v);
-	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
-	mlx_loop(v->mlx_ptr);
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 20, 0xFFFFFF, "Move: Arrows");
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 40, 0xFFFFFF, "Flatten: -/+");
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 60, 0xFFFFFF, "Zoom: A/S");
 }
 
 int	main(int argc, char **argv)
@@ -109,16 +109,10 @@ int	main(int argc, char **argv)
 	if (fd < 0)
 		panic("error: Open failed. No such file or directory.\n", NULL);
 	v = set_vars(argv[1], fd);
-/*	ft_putnbr(v->row_count);
-	ft_putchar('\n');
-	ft_putnbr(v->nums_line);
-	ft_putchar('\n'); */
-/*	print_intarr(v->arr, v->row_count, v->col_count); */
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);
 	image_to_display(v);
-/*	draw_iso(v, 0, 0);
-	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
-	mlx_key_hook(v->win_ptr, hook_key, v);
-	mlx_loop(v->mlx_ptr);*/
+	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
+	mlx_loop(v->mlx_ptr);
+	mlx_loop(v->mlx_ptr);
 	return (0);
 }

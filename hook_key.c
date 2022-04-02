@@ -61,28 +61,30 @@ int	hook_key(int keycode, t_vars *v)
 	ft_putchar('\n');
 	if (keycode == 53)
 		panic("", v);
-	if (keycode == 125)
+	else if (keycode == 125)
 		v->y_ofs -= 10;
-	if (keycode == 126)
+	else if (keycode == 126)
 		v->y_ofs += 10;
-	if (keycode == 124)
+	else if (keycode == 124)
 		v->x_ofs -= 10;
-	if (keycode == 123)
+	else if (keycode == 123)
 		v->x_ofs += 10;
-	if (keycode == 69 || keycode == 24)
+	else if (keycode == 69 || keycode == 24)
 		v->z_ofs += 1;
-	if (keycode == 78 || keycode == 27)
+	else if (keycode == 78 || keycode == 27)
 		v->z_ofs -= 1;
-	if (keycode == 0)
+	else if (keycode == 0)
 	{
 		v->tile_h += 2;
 		v->tile_w += 4;
 	}
-	if (keycode == 1)
+	else if (keycode == 1 && v->tile_h> 3)
 	{
 		v->tile_h -= 2;
 		v->tile_w -= 4;
 	}
+	else
+		return (0);
 	refresh(v);
 	return (0);
 }
