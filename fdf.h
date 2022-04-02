@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 13:26:47 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/02 14:08:43 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define W_WIDTH 1900
 # define W_HEIGHT 1100
 
-# define TILE_W 400
-# define TILE_H 200
+# define TILE_W 100
+# define TILE_H 50
 
 typedef struct s_data {
 	void	*img;
