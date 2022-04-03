@@ -21,7 +21,7 @@ FRAMEWORKS = -framework OpenGL -framework AppKit
 #SCRS_LIST = main.c
 #SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS = main.o ft_mlx_pixel_put.o draw_line.o hook_key.o tile_and_block.o \
-	   free_arrays.o read_values.o
+	   free_arrays.o read_values.o draw_projection.o
 
 all:  $(NAME)
 

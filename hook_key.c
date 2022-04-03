@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 23:19:03 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/03 23:52:03 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,18 @@ static void	clear_image(t_vars *v)
 
 static void	refresh(t_vars *v)
 {
-	mlx_clear_window(v->mlx_ptr, v->win_ptr);
+//	mlx_clear_window(v->mlx_ptr, v->win_ptr);
 	clear_image(v);
 	image_to_display(v);
-/*	draw_iso(v, 0, 0);
-	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0); */
+}
+
+void	image_to_display(t_vars *v)
+{
+	draw_iso(v, 0, 0);
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 20, 0xFFFFFF, "Move: Arrows");
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 40, 0xFFFFFF, "Flatten: -/+");
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 60, 0xFFFFFF, "Zoom: A/S");
 }
 
 int	hook_key(int keycode, t_vars *v)
@@ -78,7 +85,7 @@ int	hook_key(int keycode, t_vars *v)
 		v->tile_h += 2;
 		v->tile_w += 4;
 	}
-	else if (keycode == 1 && v->tile_h> 3)
+	else if (keycode == 1 && v->tile_h > 3)
 	{
 		v->tile_h -= 2;
 		v->tile_w -= 4;

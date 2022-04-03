@@ -12,9 +12,8 @@
 
 #include "fdf.h"
 
-static void	update_count(t_vars *v, int fd)
+static void	update_count(t_vars *v, int fd, int ret)
 {
-	int		ret;
 	char	*line;
 	char	**split;
 
@@ -109,7 +108,7 @@ int	**read_values(int fd, char *argv, t_vars *v)
 {
 	int		**points;
 
-	update_count(v, fd);
+	update_count(v, fd, 0);
 	points = altitudes_to_array(v->row_count, v->col_count, argv);
 	count_altitudes(v, points);
 	ft_putnbr(v->max_altitude);
