@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:36:54 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 20:52:55 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 14:21:22 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static void	draw_x(t_data *img, t_line line, int color)
 
 	set_offset(line, &x_ofs, &y_ofs);
 	presicion = 2 * ft_abs(line.delta_y) - ft_abs(line.delta_x);
-	i = -1;
-	while (++i < ft_abs(line.delta_x))
+	i = 0;
+	while (i < ft_abs(line.delta_x))
 	{
-		if (line.x0 > 0 && line.x0 <= W_WIDTH
-			&& line.y0 > 0 && line.y0 <= W_HEIGHT)
+		if (line.x0 >= 0 && line.x0 < W_WIDTH
+			&& line.y0 >= 0 && line.y0 < W_HEIGHT)
 			ft_mlx_pixel_put(img, line.x0, line.y0, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_y);
@@ -47,6 +47,7 @@ static void	draw_x(t_data *img, t_line line, int color)
 			line.y0 += y_ofs;
 		}
 		line.x0 += x_ofs;
+		i++;
 	}
 }
 
@@ -59,11 +60,11 @@ static void	draw_y(t_data *img, t_line line, int color)
 
 	set_offset(line, &x_ofs, &y_ofs);
 	presicion = 2 * ft_abs(line.delta_x) - ft_abs(line.delta_y);
-	i = -1;
-	while (++i < ft_abs(line.delta_y))
+	i = 0;
+	while (i < ft_abs(line.delta_y))
 	{
-		if (line.x0 > 0 && line.x0 <= W_WIDTH
-			&& line.y0 > 0 && line.y0 <= W_HEIGHT)
+		if (line.x0 >= 0 && line.x0 < W_WIDTH
+			&& line.y0 >= 0 && line.y0 < W_HEIGHT)
 			ft_mlx_pixel_put(img, line.x0, line.y0, color);
 		if (presicion < 0)
 			presicion = presicion + 2 * ft_abs(line.delta_x);
@@ -73,6 +74,7 @@ static void	draw_y(t_data *img, t_line line, int color)
 			line.x0 += x_ofs;
 		}
 		line.y0 += y_ofs;
+		i++;
 	}
 }
 

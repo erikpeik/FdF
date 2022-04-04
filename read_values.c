@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 11:58:13 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:27:02 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,5 @@ int	**read_values(int fd, char *argv, t_vars *v)
 	update_count(v, fd, 0);
 	points = altitudes_to_array(v->row_count, v->col_count, argv);
 	count_altitudes(v, points);
-	ft_putnbr(v->max_altitude);
-	ft_putchar('\n');
-	ft_putnbr(v->min_altitude);
-	ft_putchar('\n');
 	return (points);
 }
