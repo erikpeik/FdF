@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:25:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:14:51 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:10:18 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	initilize_colors(t_vars *v)
 	v->colors[1][1] = 0xffe042;
 	v->colors[2][0] = 0xed335f;
 	v->colors[2][1] = 0xf9858b;
-	v->colors[3][0] = 0x4d3227;
+	v->colors[3][0] = 0x603601;
 	v->colors[3][1] = 0xebc999;
-	v->colors[4][0] = 0x3d4c41;
+	v->colors[4][0] = 0x22577e;
 	v->colors[4][1] = 0x999999;
 	v->light_switch = 0;
 	v->colormode[0] = 0x121212;
