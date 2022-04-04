@@ -6,39 +6,39 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 13:27:02 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 16:11:26 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	update_count(t_vars *v, int fd, int ret)
+static void	update_count(t_vars *v, int fd, int ret, char *line)
 {
-	char	*line;
-	char	**split;
-
-	v->row_count = 0;
 	ret = get_next_line(fd, &line);
 	if (ret < 1)
 		panic("error: File was empty or directory\n", v);
-	split = ft_strsplit(line, ' ');
-	free(line);
-	v->col_count = (int) ft_arrlen((const void **) split) - 1;
-	free_strarr(split);
+	v->split = ft_strsplit(line, ' ');
+	if (!v->split)
+		panic("error: malloc failed.\n", v);
+	ft_strdel(&line);
+	v->col_count = (int) ft_arrlen((const void **) v->split) - 1;
+	free_strarr(v->split);
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret)
 		{
-			split = ft_strsplit((char const *) line, ' ');
+			v->split = ft_strsplit((char const *) line, ' ');
+			if (!v->split)
+				panic("error: malloc failed.\n", v);
 			ft_strdel(&line);
-			free_strarr(split);
-			if ((ft_arrlen((const void **) split) - 1) != (size_t) v->col_count)
+			free_strarr(v->split);
+			if ((ft_arrlen((const void **) v->split) - 1)
+				!= (size_t) v->col_count)
 				panic("error: Differences on lines.\n", v);
 		}
 		v->row_count++;
 	}
-	close(fd);
 }
 
 static int	*atoi_splits(char **splits, int col)
@@ -47,6 +47,8 @@ static int	*atoi_splits(char **splits, int col)
 	int	i;
 
 	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
+	if (!split)
+		panic("error: malloc failed\n", NULL);
 	i = 0;
 	while (i <= col)
 	{
@@ -56,26 +58,28 @@ static int	*atoi_splits(char **splits, int col)
 	return (split);
 }
 
-static int	**altitudes_to_array(int row, int col, char *argv)
+static int	**altitudes_to_array(t_vars *v, int fd)
 {
-	int		fd;
 	char	*line;
 	int		**points;
 	char	**splits;
 	int		i;
 
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-		panic("error: Open failed.\n", NULL);
-	points = (int **) malloc(sizeof(int *) * (size_t)row);
+	points = (int **) malloc(sizeof(int *) * (size_t)v->row_count);
+	if (!points)
+		panic("error: malloc fail.\n", v);
 	i = 0;
-	while (i < row)
+	while (i < v->row_count)
 	{
 		if (get_next_line(fd, &line) < 1)
-			panic("error: get_next_line error\n", NULL);
+			panic("error: get_next_line error\n", v);
 		splits = ft_strsplit((char const *) line, ' ');
+		if (!splits)
+			panic("error: ft_strsplit failed.\n", v);
 		ft_strdel(&line);
-		points[i] = atoi_splits(splits, col);
+		points[i] = atoi_splits(splits, v->col_count);
+		if (!(points[i]) && free_intarr(points, i) && free_strarr(splits))
+			panic("error: malloc failed.\n", v);
 		free_strarr(splits);
 		i++;
 	}
@@ -107,9 +111,15 @@ static void	count_altitudes(t_vars *v, int **points)
 int	**read_values(int fd, char *argv, t_vars *v)
 {
 	int		**points;
+	char	*line;
 
-	update_count(v, fd, 0);
-	points = altitudes_to_array(v->row_count, v->col_count, argv);
+	line = NULL;
+	update_count(v, fd, 0, line);
+	close(fd);
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		panic("error: Open failed.\n", v);
+	points = altitudes_to_array(v, fd);
 	count_altitudes(v, points);
 	return (points);
 }

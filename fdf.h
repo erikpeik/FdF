@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 12:13:15 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 15:54:56 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ typedef struct s_line {
 }				t_line;
 
 typedef struct s_vars {
+	struct s_line	line;
+	struct s_data	data;
 	void			*mlx_ptr;
 	void			*win_ptr;
+	int				**arr;
+	char			**split;
 	int				row_count;
 	int				col_count;
 	int				max_altitude;
@@ -53,9 +57,6 @@ typedef struct s_vars {
 	int				tile_w;
 	int				tile_h;
 	int				projection;
-	struct s_line	line;
-	struct s_data	data;
-	int				**arr;
 }				t_vars;
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);

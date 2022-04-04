@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:06:38 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 13:07:05 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 15:58:26 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	free_strarr(char **split)
 			free(split[i]);
 			i++;
 		}
+		free(split);
 	}
-	free(split);
 	split = NULL;
 	return (1);
 }

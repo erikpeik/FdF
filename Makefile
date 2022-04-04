@@ -12,7 +12,7 @@
 
 NAME = fdf
 CC = gcc
-CFLAGS = -Wall -Wextra -Wconversion  -Werror
+CFLAGS = -Wall -Wextra #-Werror -Wconversion
 LIBFT = -I libft/includes -L libft -lft
 MLX_INCL = -I minilibx -L minilibx -lmlx
 MLX_SCHOOL = -I /usr/local/include -L /usr/local/lib -lmlx
@@ -30,7 +30,7 @@ all:  $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
-	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(LIBFT) $(FRAMEWORKS)
+	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(LIBFT) $(CFLAGS) $(FRAMEWORKS)
 
 clean:
 	make clean -C libft/

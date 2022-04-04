@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 14:16:16 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 15:42:07 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ static t_vars	*set_vars(char *argv, int fd)
 	t_vars	*v;
 
 	v = (t_vars *) malloc(sizeof (t_vars));
+	if (!v)
+		panic("error: malloc fail", NULL);
 	v->mlx_ptr = mlx_init();
+	if (!v->mlx_ptr)
+		panic("error: failed creating mlx_ptr\n", v);
 	v->win_ptr = mlx_new_window(v->mlx_ptr, W_WIDTH, W_HEIGHT, "FdF");
+	if (!v->win_ptr)
+		panic("error: failed creating win_ptr\n", v);
 	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH, W_HEIGHT);
 	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
 		&v->data.line_len, &v->data.endian);
