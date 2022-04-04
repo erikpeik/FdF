@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 15:42:07 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 16:53:11 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_vars	*set_vars(char *argv, int fd)
 	v->y_ofs = 100;
 	v->z_ofs = 5;
 	v->projection = 1;
+	initilize_colors(v);
 	return (v);
 }
 
@@ -50,7 +51,7 @@ int	main(int argc, char **argv)
 		panic("error: Open failed. No such file or directory.\n", NULL);
 	v = set_vars(argv[1], fd);
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);
-	image_to_display(v);
+	refresh(v);
 	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
 	mlx_loop(v->mlx_ptr);
 	return (0);

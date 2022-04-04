@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 12:14:48 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:02:32 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ static void	flatten_z(int keycode, t_vars *v)
 	}
 }
 
+static void	change_colortheme(int keycode, t_vars *v)
+{
+	if (keycode == 8)
+	{
+		if (v->color_theme == 4)
+			v->color_theme = 0;
+		else
+			v->color_theme++;
+	}
+	if (keycode == 37)
+	{
+		if (v->light_switch == 0)
+			v->light_switch = 1;
+		else
+			v->light_switch = 0;
+	}
+}
+
 int	hook_key(int keycode, t_vars *v)
 {
 	ft_putnbr(keycode);
@@ -74,6 +92,8 @@ int	hook_key(int keycode, t_vars *v)
 		v->projection = 2;
 	else if (keycode == 20)
 		v->projection = 3;
+	else if (keycode == 8 || keycode == 37)
+		change_colortheme(keycode, v);
 	else
 		return (0);
 	refresh(v);
