@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 00:22:36 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:13:15 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define W_WIDTH 1200
-# define W_HEIGHT 800
+# define W_WIDTH 1500
+# define W_HEIGHT 1200
 
 typedef struct s_data {
 	void	*img;
@@ -52,6 +52,7 @@ typedef struct s_vars {
 	int				z_ofs;
 	int				tile_w;
 	int				tile_h;
+	int				projection;
 	struct s_line	line;
 	struct s_data	data;
 	int				**arr;
@@ -63,10 +64,8 @@ int		hook_key(int keycode, t_vars *v);
 void	panic(char	*msg, t_vars *v);
 int		**read_values(int fd, char *argv, t_vars *v);
 void	image_to_display(t_vars *v);
-void	draw_iso(t_vars *v, int x, int y);
-
-void	draw_tile(t_vars *v, int x, int y, int color);
-void	draw_block(t_vars *v, int x, int y, int z);
+void	projection(t_vars *v);
+void	refresh(t_vars *v);
 
 int		free_intarr(int **split, int length);
 int		free_strarr(char **split);

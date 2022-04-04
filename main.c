@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 00:33:38 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:50:06 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,13 @@ static t_vars	*set_vars(char *argv, int fd)
 	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
 		&v->data.line_len, &v->data.endian);
 	v->arr = read_values(fd, argv, v);
-	v->x_ofs = W_WIDTH / 2;
-	v->tile_w = 50;
+	v->tile_w = W_WIDTH / v->col_count;
 	v->tile_h = v->tile_w / 2;
-	v->y_ofs = W_HEIGHT / v->col_count + 100;
+	v->x_ofs = W_WIDTH / 2;
+	v->y_ofs = 100;
 	v->z_ofs = 5;
+	v->projection = 1;
 	return (v);
-}
-
-static void	print_intarr(int **points, int row_count, int col_count)
-{
-	int	row;
-	int	col;
-
-	row = 0;
-	while (row < row_count)
-	{
-		col = 0;
-		while (col < col_count)
-		{
-			ft_putnbr(points[row][col]);
-			if (col < col_count - 1)
-				ft_putchar(' ');
-			else
-				ft_putchar('\n');
-			col++;
-		}
-		row++;
-	}
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/03 23:52:03 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 12:14:48 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,30 @@ void	panic(char	*msg, t_vars *v)
 	exit (0);
 }
 
-static void	clear_image(t_vars *v)
+static void	move_arrows(int keycode, t_vars *v)
 {
-	int	row;
-	int	col;
+	if (keycode == 125)
+		v->y_ofs -= 10;
+	if (keycode == 126)
+		v->y_ofs += 10;
+	if (keycode == 124)
+		v->x_ofs -= 10;
+	if (keycode == 123)
+		v->x_ofs += 10;
+}
 
-	row = 0;
-	while (row < W_HEIGHT)
+static void	flatten_z(int keycode, t_vars *v)
+{
+	if (keycode == 0)
 	{
-		col = 0;
-		while (col < W_WIDTH)
-		{
-			ft_mlx_pixel_put(&v->data, col, row, 0);
-			col++;
-		}
-		row++;
+		v->tile_h += 2;
+		v->tile_w += 4;
 	}
-}
-
-static void	refresh(t_vars *v)
-{
-//	mlx_clear_window(v->mlx_ptr, v->win_ptr);
-	clear_image(v);
-	image_to_display(v);
-}
-
-void	image_to_display(t_vars *v)
-{
-	draw_iso(v, 0, 0);
-	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->data.img, 0, 0);
-	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 20, 0xFFFFFF, "Move: Arrows");
-	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 40, 0xFFFFFF, "Flatten: -/+");
-	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 60, 0xFFFFFF, "Zoom: A/S");
+	if (keycode == 1 && v->tile_h > 3)
+	{
+		v->tile_h -= 2;
+		v->tile_w -= 4;
+	}
 }
 
 int	hook_key(int keycode, t_vars *v)
@@ -68,28 +60,20 @@ int	hook_key(int keycode, t_vars *v)
 	ft_putchar('\n');
 	if (keycode == 53)
 		panic("", v);
-	else if (keycode == 125)
-		v->y_ofs -= 10;
-	else if (keycode == 126)
-		v->y_ofs += 10;
-	else if (keycode == 124)
-		v->x_ofs -= 10;
-	else if (keycode == 123)
-		v->x_ofs += 10;
+	else if (keycode >= 123 && keycode <= 126)
+		move_arrows(keycode, v);
 	else if (keycode == 69 || keycode == 24)
 		v->z_ofs += 1;
 	else if (keycode == 78 || keycode == 27)
 		v->z_ofs -= 1;
-	else if (keycode == 0)
-	{
-		v->tile_h += 2;
-		v->tile_w += 4;
-	}
-	else if (keycode == 1 && v->tile_h > 3)
-	{
-		v->tile_h -= 2;
-		v->tile_w -= 4;
-	}
+	else if (keycode == 0 || keycode == 1)
+		flatten_z(keycode, v);
+	else if (keycode == 18)
+		v->projection = 1;
+	else if (keycode == 19)
+		v->projection = 2;
+	else if (keycode == 20)
+		v->projection = 3;
 	else
 		return (0);
 	refresh(v);

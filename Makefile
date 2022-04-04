@@ -12,25 +12,25 @@
 
 NAME = fdf
 CC = gcc
-CFLAGS = -Wall -Wextra #-fsanitize=address -g -Wconversion  -Werror
-CPPFLAGS = -I libft/includes -L libft -lft
+CFLAGS = -Wall -Wextra -Wconversion  -Werror
+LIBFT = -I libft/includes -L libft -lft
 MLX_INCL = -I minilibx -L minilibx -lmlx
 MLX_SCHOOL = -I /usr/local/include -L /usr/local/lib -lmlx
 FRAMEWORKS = -framework OpenGL -framework AppKit
 #SRCS_DIR = srcs/
 #SCRS_LIST = main.c
 #SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
-OBJS = main.o ft_mlx_pixel_put.o draw_line.o hook_key.o tile_and_block.o \
-	   free_arrays.o read_values.o draw_projection.o
+OBJS = main.o ft_mlx_pixel_put.o draw_line.o hook_key.o free_arrays.o \
+	   read_values.o draw_projection.o images.o
 
 all:  $(NAME)
 
-%.o: %.c
+%.o: %.c Makefile
 	$(CC) $(CFLAGS) -I libft/includes -c $< -o $@
 
 $(NAME): $(OBJS)
 	make -C libft/
-	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(CPPFLAGS) $(FRAMEWORKS)
+	$(CC) -o $(NAME) $(OBJS) $(MLX_SCHOOL) $(LIBFT) $(FRAMEWORKS)
 
 clean:
 	make clean -C libft/

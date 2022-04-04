@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/02 23:01:10 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 11:58:13 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	*atoi_splits(char **splits, int col)
 	int	*split;
 	int	i;
 
-	split = (int *) malloc(sizeof(int) * (col + 1));
+	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
 	i = 0;
 	while (i <= col)
 	{
@@ -67,7 +67,7 @@ static int	**altitudes_to_array(int row, int col, char *argv)
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		panic("error: Open failed.\n", NULL);
-	points = (int **) malloc(sizeof(int *) * row);
+	points = (int **) malloc(sizeof(int *) * (size_t)row);
 	i = 0;
 	while (i < row)
 	{
