@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:12:27 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:15:52 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:55:03 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	image_to_display(t_vars *v)
 	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 40, color, "Flatten: -/+");
 	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 60, color, "Zoom: A/S");
 	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 80, color, "Projection: 1-3");
-	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 100, color, "Colors: c");
+	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 100, color, "Colors: C");
 	mlx_string_put(v->mlx_ptr, v->win_ptr, 20, 120, color, "Light mode: L");
 }
