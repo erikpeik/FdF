@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:16:12 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:54:33 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *img, t_line line, int color);
 int		hook_key(int keycode, t_vars *v);
 void	panic(char	*msg, t_vars *v);
-int		**read_values(int fd, char *argv, t_vars *v);
+void	read_values(int fd, char *argv, t_vars *v);
 void	image_to_display(t_vars *v);
 void	projection(t_vars *v);
 void	refresh(t_vars *v);

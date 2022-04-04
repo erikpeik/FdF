@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 16:11:26 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:54:51 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ static int	*atoi_splits(char **splits, int col)
 	return (split);
 }
 
-static int	**altitudes_to_array(t_vars *v, int fd)
+static void	altitudes_to_array(t_vars *v, int fd)
 {
 	char	*line;
-	int		**points;
 	char	**splits;
 	int		i;
 
-	points = (int **) malloc(sizeof(int *) * (size_t)v->row_count);
-	if (!points)
+	v->arr = (int **) malloc(sizeof(int *) * (size_t)v->row_count);
+	if (!v->arr)
 		panic("error: malloc fail.\n", v);
 	i = 0;
 	while (i < v->row_count)
@@ -77,14 +76,14 @@ static int	**altitudes_to_array(t_vars *v, int fd)
 		if (!splits)
 			panic("error: ft_strsplit failed.\n", v);
 		ft_strdel(&line);
-		points[i] = atoi_splits(splits, v->col_count);
-		if (!(points[i]) && free_intarr(points, i) && free_strarr(splits))
+		v->arr[i] = atoi_splits(splits, v->col_count);
+		if (!(v->arr[i]) && free_intarr(v->arr, i) && free_strarr(splits))
 			panic("error: malloc failed.\n", v);
 		free_strarr(splits);
 		i++;
 	}
 	close(fd);
-	return (points);
+
 }
 
 static void	count_altitudes(t_vars *v, int **points)
@@ -108,9 +107,8 @@ static void	count_altitudes(t_vars *v, int **points)
 	}
 }
 
-int	**read_values(int fd, char *argv, t_vars *v)
+void	read_values(int fd, char *argv, t_vars *v)
 {
-	int		**points;
 	char	*line;
 
 	line = NULL;
@@ -119,7 +117,6 @@ int	**read_values(int fd, char *argv, t_vars *v)
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		panic("error: Open failed.\n", v);
-	points = altitudes_to_array(v, fd);
-	count_altitudes(v, points);
-	return (points);
+	altitudes_to_array(v, fd);
+	count_altitudes(v, v->arr);
 }

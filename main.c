@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 16:53:11 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:52:32 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_vars	*set_vars(char *argv, int fd)
 	v->data.img = mlx_new_image(v->mlx_ptr, W_WIDTH, W_HEIGHT);
 	v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bpp, \
 		&v->data.line_len, &v->data.endian);
-	v->arr = read_values(fd, argv, v);
+	read_values(fd, argv, v);
 	v->tile_w = 100;
 	v->tile_h = v->tile_w / 2;
 	v->x_ofs = W_WIDTH / 2;
