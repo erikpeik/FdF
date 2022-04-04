@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:54:33 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:25:50 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 # define W_WIDTH 1500
-# define W_HEIGHT 1200
+# define W_HEIGHT 1000
 
 typedef struct s_data {
 	void	*img;

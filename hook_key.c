@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 18:03:34 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:28:52 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ static void	change_colortheme(int keycode, t_vars *v)
 
 int	hook_key(int keycode, t_vars *v)
 {
-	ft_putnbr(keycode);
-	ft_putchar('\n');
 	if (keycode == 53)
 		panic("", v);
 	else if (keycode >= 123 && keycode <= 126)
@@ -97,7 +95,10 @@ int	hook_key(int keycode, t_vars *v)
 	else if (keycode == 8 || keycode == 37)
 		change_colortheme(keycode, v);
 	else
+	{
+		ft_putstr("Key that you pressed is not mapped.\n");
 		return (0);
+	}
 	refresh(v);
 	return (0);
 }
