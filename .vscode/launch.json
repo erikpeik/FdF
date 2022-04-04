@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${fileDirname}/fdf",
-			"args": ["eval_tests/42.fdf"],
+			"args": ["eval_tests/pyramide.fdf"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
