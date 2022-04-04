@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:06:38 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 15:58:26 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 17:34:10 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	free_intarr(int **split, int length)
 	if (split)
 	{
 		while (i < length)
-			free(split[i++]);
+		{
+			free(split[i]);
+			i++;
+		}
 		free(split);
 	}
 	split = NULL;
