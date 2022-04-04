@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:54:51 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/04 18:05:38 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	altitudes_to_array(t_vars *v, int fd)
 		i++;
 	}
 	close(fd);
-
 }
 
 static void	count_altitudes(t_vars *v, int **points)
