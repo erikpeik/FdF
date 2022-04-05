@@ -16,7 +16,7 @@ static char	*ft_fill_itoa(char *itoa, int n, int len)
 {
 	while (n > 0)
 	{
-		itoa[len--] = n % 10 + '0';
+		itoa[len--] = (char) n % 10 + '0';
 		n = n / 10;
 	}
 	return (itoa);
