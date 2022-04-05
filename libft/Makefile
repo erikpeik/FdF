@@ -6,7 +6,7 @@
 #    By: emende <emende@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 15:19:20 by emende            #+#    #+#              #
-#    Updated: 2022/04/04 13:45:40 by emende           ###   ########.fr        #
+#    Updated: 2022/04/05 11:57:25 by emende           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ INCLUDES = -I $(INCL_FOLDER)
 
 OPTIONS = -c
 
-CFLAG = -Wall -Wextra -Werror -Wconversion
+CFLAG = -Wall -Wextra -Werror
 
 RED = \033[0;31m
 LGRAY = \033[1;30m
