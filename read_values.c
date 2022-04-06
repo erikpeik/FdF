@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/05 11:57:00 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:54:19 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	update_count(t_vars *v, int fd, int ret, char *line)
 			if (!v->split)
 				panic("error: malloc failed.\n", v);
 			ft_strdel(&line);
-			if ((ft_arrlen((const void **) v->split) - 1)
+			if ((ft_arrlen((const void **) v->split) - 1) \
 				!= (size_t) v->col_count)
 				panic("error: Differences on lines.\n", v);
 			free_strarr(v->split);
