@@ -7,7 +7,8 @@ FdF offers to visualize “iron wire” meshing in 3D. Using MinilibX graphic li
 # How to use
 ### How to install MinilibX
 [MinilibX for Mac users](https://github.com/erikpeik/FdF/files/8411854/minilibx_mms_20191025_beta.zip)
-- Download Minilibx from link above
+[MinilibX for Linux](https://github.com/42Paris/minilibx-linux)
+- Download Minilibx from links above
 - Run Makefile and then copy two files:
   - libmlx.a in /usr/local/lib
   - mlx.h in /usr/local/include
