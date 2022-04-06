@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:00:48 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 13:46:01 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:48:08 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int		ft_abs(int i);
 void	ft_swap(int *a, int *b);
 size_t	ft_arrlen(const void **arr);
 int		ft_sqrt(int x);
+void	ft_putnbr_endl(int n);
 
 #endif
