@@ -6,29 +6,11 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 18:28:52 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:58:47 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	panic(char	*msg, t_vars *v)
-{
-	ft_putstr_fd(msg, 2);
-	if (v)
-	{
-		if (v->mlx_ptr && v->data.img)
-			mlx_destroy_image(v->mlx_ptr, v->data.img);
-		if (v->mlx_ptr && v->win_ptr)
-			mlx_destroy_window(v->mlx_ptr, v->win_ptr);
-		if (v->arr && v->row_count > 0)
-			free_intarr(v->arr, v->row_count);
-		if (v->mlx_ptr)
-			free(v->mlx_ptr);
-		free(v);
-	}
-	exit (0);
-}
 
 static void	move_arrows(int keycode, t_vars *v)
 {
@@ -74,28 +56,36 @@ static void	change_colortheme(int keycode, t_vars *v)
 	}
 }
 
-int	hook_key(int keycode, t_vars *v)
+static void	change_projection(int keycode, t_vars *v)
 {
-	ft_putnbr(keycode);
-	ft_putchar('\n');
-	if (keycode == 53 || keycode == 0xFF1B)
-		panic("", v);
-	else if ((keycode >= 123 && keycode <= 126) || (keycode >= 0xff51 && keycode <= 0xff54))
-		move_arrows(keycode, v);
-	else if (keycode == 69 || keycode == 24 || keycode == 0xfe51 || keycode == 0xffab)
-		v->z_ofs += 1;
-	else if (keycode == 78 || keycode == 27 || keycode == 43 || keycode == 0xffad)
-		v->z_ofs -= 1;
-	else if (keycode == 0 || keycode == 1 || keycode == 97 || keycode == 115)
-		tile_size(keycode, v);
-	else if (keycode == 18 || keycode == 49)
+	if (keycode == 18 || keycode == 49)
 		v->projection = 1;
 	else if (keycode == 19 || keycode == 50)
 		v->projection = 2;
 	else if (keycode == 20 || keycode == 51)
 		v->projection = 3;
-	else if (keycode == 8 || keycode == 37 || keycode == 99 || keycode == 108)
-		change_colortheme(keycode, v);
+}
+
+int	hook_key(int keycode, t_vars *v)
+{
+	int	key;
+
+	key = keycode;
+	ft_putnbr_endl(key);
+	if (key == 53 || key == 0xFF1B)
+		panic("", v);
+	else if ((key >= 123 && key <= 126) || (key >= 0xff51 && key <= 0xff54))
+		move_arrows(key, v);
+	else if (key == 69 || key == 24 || key == 0xfe51 || key == 0xffab)
+		v->z_ofs += 1;
+	else if (key == 78 || key == 27 || key == 43 || key == 0xffad)
+		v->z_ofs -= 1;
+	else if (key == 0 || key == 1 || key == 97 || key == 115)
+		tile_size(key, v);
+	else if ((key >= 18 && key <= 20) || (key >= 49 && key <= 51))
+		change_projection(key, v);
+	else if (key == 8 || key == 37 || key == 99 || key == 108)
+		change_colortheme(key, v);
 	else
 	{
 		ft_putstr("Key that you pressed is not mapped.\n");

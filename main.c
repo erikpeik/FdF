@@ -6,11 +6,29 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 17:52:32 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:58:38 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	panic(char	*msg, t_vars *v)
+{
+	ft_putstr_fd(msg, 2);
+	if (v)
+	{
+		if (v->mlx_ptr && v->data.img)
+			mlx_destroy_image(v->mlx_ptr, v->data.img);
+		if (v->mlx_ptr && v->win_ptr)
+			mlx_destroy_window(v->mlx_ptr, v->win_ptr);
+		if (v->arr && v->row_count > 0)
+			free_intarr(v->arr, v->row_count);
+		if (v->mlx_ptr)
+			free(v->mlx_ptr);
+		free(v);
+	}
+	exit (0);
+}
 
 static t_vars	*set_vars(char *argv, int fd)
 {
