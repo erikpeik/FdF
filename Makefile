@@ -31,6 +31,7 @@ UNAME := $(shell uname -s)
 ifeq ($(UNAME), Darwin)
 FRAMEWORKS = -framework OpenGL -framework AppKit
 endif
+
 ifeq ($(UNAME), Linux)
 MLX += -lX11 -lXext
 endif
