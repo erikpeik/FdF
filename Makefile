@@ -6,7 +6,7 @@
 #    By: emende <emende@student.42.fr>              +#+  +:+       +#+         #
 :#                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 12:46:17 by emende            #+#    #+#              #
-#    Updated: 2022/03/27 18:39:18 by emende           ###   ########.fr        #
+#    Updated: 2022/04/07 12:46:12 by emende           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ MLX = -I /usr/X11/include
 endif
 
 ifneq (,$(wildcard /usr/local/lib/libmlx.a))
+MLX += -L /usr/local/lib -lmlx
+else ifneq (,$(wildcard /usr/local/lib/libmlx.dylib))
 MLX += -L /usr/local/lib -lmlx
 else
 MLX += -L /usr/X11/lib -lmlx
