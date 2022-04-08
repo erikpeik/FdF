@@ -25,6 +25,7 @@
 				"${fileDirname}/images.c",
 				"${fileDirname}/free_arrays.c",
 				"${fileDirname}/read_values.c",
+				"${fileDirname}/color.c",
 				"-o",
 				"${fileDirname}/fdf"
 			],
