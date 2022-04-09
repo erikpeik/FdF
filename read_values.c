@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 19:27:22 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 20:22:06 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static int	*atoi_splits(char **splits, int col)
 	int	*split;
 	int	i;
 
-//	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
-	split = NULL;
+	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
 	if (!split)
 		return (NULL);
 	i = 0;
