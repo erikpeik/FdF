@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:08:03 by emende            #+#    #+#             */
-/*   Updated: 2022/04/06 16:54:19 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 19:27:22 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	update_count(t_vars *v, int fd, int ret, char *line)
 		panic("error: malloc failed.\n", v);
 	ft_strdel(&line);
 	v->col_count = (int) ft_arrlen((const void **) v->split) - 1;
-	free_strarr(v->split);
+	free_strarr(&v->split);
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
@@ -35,7 +35,7 @@ static void	update_count(t_vars *v, int fd, int ret, char *line)
 			if ((ft_arrlen((const void **) v->split) - 1) \
 				!= (size_t) v->col_count)
 				panic("error: Differences on lines.\n", v);
-			free_strarr(v->split);
+			free_strarr(&v->split);
 		}
 		v->row_count++;
 	}
@@ -46,9 +46,10 @@ static int	*atoi_splits(char **splits, int col)
 	int	*split;
 	int	i;
 
-	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
+//	split = (int *) malloc(sizeof(int) * (size_t)(col + 1));
+	split = NULL;
 	if (!split)
-		panic("error: malloc failed\n", NULL);
+		return (NULL);
 	i = 0;
 	while (i <= col)
 	{
@@ -77,9 +78,9 @@ static void	altitudes_to_array(t_vars *v, int fd)
 			panic("error: ft_strsplit failed.\n", v);
 		ft_strdel(&line);
 		v->arr[i] = atoi_splits(splits, v->col_count);
-		if (!(v->arr[i]) && free_intarr(v->arr, i) && free_strarr(splits))
+		if (!(v->arr[i]) && free_intarr(&v->arr, i) && free_strarr(&splits))
 			panic("error: malloc failed.\n", v);
-		free_strarr(splits);
+		free_strarr(&splits);
 		i++;
 	}
 	close(fd);

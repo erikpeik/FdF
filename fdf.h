@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 17:45:39 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 19:26:40 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	refresh(t_vars *v);
 void	initilize_colors(t_vars *v);
 void	change_colortheme(int keycode, t_vars *v);
 
-int		free_intarr(int **split, int length);
-int		free_strarr(char **split);
+int		free_intarr(int ***split, int length);
+int		free_strarr(char ***split);
 
 #endif
