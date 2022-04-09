@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:25:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 18:10:18 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 17:45:25 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,22 @@ void	initilize_colors(t_vars *v)
 	v->light_switch = 0;
 	v->colormode[0] = 0x121212;
 	v->colormode[1] = 0xececec;
+}
+
+void	change_colortheme(int keycode, t_vars *v)
+{
+	if (keycode == 8 || keycode == 99)
+	{
+		if (v->color_theme == 4)
+			v->color_theme = 0;
+		else
+			v->color_theme++;
+	}
+	if (keycode == 37 || keycode == 108)
+	{
+		if (v->light_switch == 0)
+			v->light_switch = 1;
+		else
+			v->light_switch = 0;
+	}
 }

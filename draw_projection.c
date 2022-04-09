@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:37:34 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 16:17:03 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 17:40:38 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	upd_col(int point1, int point2, t_vars *v)
 
 	point1_z = point1 * v->z_ofs * v->z_ofs2;
 	point2_z = point2 * v->z_ofs * v->z_ofs2;
-	if ((point1_z < 0.01 && point1_z > -0.01) \
-		&& (point2_z < 0.01 && point2_z > -0.01))
+	if (point1_z == 0 && point2_z == 0)
 		v->color = v->colors[v->color_theme][1];
 	else
 		v->color = v->colors[v->color_theme][0];

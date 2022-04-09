@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:12:27 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 18:55:03 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 17:26:11 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	clear_image(t_vars *v)
 void	refresh(t_vars *v)
 {
 	clear_image(v);
+	if (v->z_ofs2 < 0.001 && v->z_ofs2 > -0.001)
+		v->z_ofs2 = 0;
 	image_to_display(v);
 }
 
