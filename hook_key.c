@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/06 16:58:47 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 15:48:30 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,11 @@ static void	move_arrows(int keycode, t_vars *v)
 static void	tile_size(int keycode, t_vars *v)
 {
 	if (keycode == 0 || keycode == 97)
-	{
-		v->tile_h += 2;
 		v->tile_w += 4;
-	}
 	if ((keycode == 1 || keycode == 115) && v->tile_h > 3)
-	{
-		v->tile_h -= 2;
 		v->tile_w -= 4;
-	}
+	v->tile_h = v->tile_w / 2;
+	v->z_ofs = (v->tile_h / 5);
 }
 
 static void	change_colortheme(int keycode, t_vars *v)
@@ -77,9 +73,9 @@ int	hook_key(int keycode, t_vars *v)
 	else if ((key >= 123 && key <= 126) || (key >= 0xff51 && key <= 0xff54))
 		move_arrows(key, v);
 	else if (key == 69 || key == 24 || key == 0xfe51 || key == 0xffab)
-		v->z_ofs += 1;
+		v->z_ofs2 += 0.1;
 	else if (key == 78 || key == 27 || key == 43 || key == 0xffad)
-		v->z_ofs -= 1;
+		v->z_ofs2 -= 0.1;
 	else if (key == 0 || key == 1 || key == 97 || key == 115)
 		tile_size(key, v);
 	else if ((key >= 18 && key <= 20) || (key >= 49 && key <= 51))

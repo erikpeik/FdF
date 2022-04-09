@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:37:34 by emende            #+#    #+#             */
-/*   Updated: 2022/04/06 16:55:26 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 16:17:03 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static int	upd_col(int point1, int point2, t_vars *v)
 {
-	if (point1 * v->z_ofs != 0 || point2 * v->z_ofs != 0)
-		v->color = v->colors[v->color_theme][0];
-	else
+	double	point1_z;
+	double	point2_z;
+
+	point1_z = point1 * v->z_ofs * v->z_ofs2;
+	point2_z = point2 * v->z_ofs * v->z_ofs2;
+	if ((point1_z < 0.01 && point1_z > -0.01) \
+		&& (point2_z < 0.01 && point2_z > -0.01))
 		v->color = v->colors[v->color_theme][1];
+	else
+		v->color = v->colors[v->color_theme][0];
 	return (1);
 }
 
@@ -30,10 +36,10 @@ static void	draw_iso(t_vars *v, int x, int y)
 		{
 			v->line.x0 = v->x_ofs + ((v->tile_w / 2) * (x - y));
 			v->line.y0 = v->y_ofs + (v->tile_h / 2) * (x + y) \
-				- (v->arr[y][x] * v->z_ofs);
+				- ((v->arr[y][x] * v->z_ofs) * v->z_ofs2);
 			v->line.x1 = v->line.x0 + (v->tile_w / 2);
 			v->line.y1 = v->y_ofs + (v->tile_h / 2) * ((x + 1) + y) \
-				- (v->arr[y][x + 1] * v->z_ofs);
+				- ((v->arr[y][x + 1] * v->z_ofs) * v->z_ofs2);
 			if (x < v->col_count && upd_col(v->arr[y][x], v->arr[y][x + 1], v))
 				draw_line(&v->data, v->line, v->color);
 			if (y < v->row_count - 1
@@ -41,7 +47,7 @@ static void	draw_iso(t_vars *v, int x, int y)
 			{
 				v->line.x1 -= v->tile_w;
 				v->line.y1 = v->y_ofs + (v->tile_h / 2) * (x + (y + 1)) \
-					- (v->arr[y + 1][x] * v->z_ofs);
+					- ((v->arr[y + 1][x] * v->z_ofs) * v->z_ofs2);
 				draw_line(&v->data, v->line, v->color);
 			}
 			x++;

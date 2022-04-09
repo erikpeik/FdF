@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/04 18:25:50 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 15:43:23 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ typedef struct s_vars {
 	int				color_theme;
 	int				x_ofs;
 	int				y_ofs;
-	int				z_ofs;
-	int				tile_w;
-	int				tile_h;
+	double			z_ofs;
+	double			z_ofs2;
+	double			tile_w;
+	double			tile_h;
 	int				projection;
 }				t_vars;
 
