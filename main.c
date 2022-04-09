@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	v = set_vars(argv[1], fd);
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);
 	refresh(v);
-	mlx_hook(v->win_ptr, 2, 0, hook_key, v);
+	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
 	mlx_loop(v->mlx_ptr);
 	return (0);
 }
