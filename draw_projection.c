@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:37:34 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 23:46:20 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/10 00:30:20 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	draw_iso(t_vars *v, int x, int y)
 			if (y < v->row_count - 1
 				&& upd_col(v->arr[y][x], v->arr[y + 1][x], v))
 			{
-				v->line.x1 -= v->tile_w;
+				v->line.x1 -= (int) v->tile_w;
 				v->line.y1 = v->y_ofs + ((int)(v->tile_h / 2) * (x + (y + 1))) \
 					- ((int)((v->arr[y + 1][x] * v->z_ofs) * v->z_ofs2));
 				draw_line(v);
@@ -82,7 +82,7 @@ static void	topdown(t_vars *v, int x, int y)
 			if (y < v->row_count - 1 \
 				&& upd_col(v->arr[y][x], v->arr[y + 1][x], v))
 			{
-				v->line.x1 -= v->tile_w / 2;
+				v->line.x1 -= (int) v->tile_w / 2;
 				v->line.y1 = v->y_ofs + ((int)(v->tile_h * (y + 1)));
 				draw_line(v);
 			}
