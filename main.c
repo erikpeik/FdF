@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 16:16:41 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 18:47:18 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	panic(char	*msg, t_vars *v)
 			mlx_destroy_window(v->mlx_ptr, v->win_ptr);
 		if (v->arr && v->row_count > 0)
 			free_intarr(v->arr, v->row_count);
-		if (v->mlx_ptr)
-			free(v->mlx_ptr);
 		free(v);
 	}
 	exit (0);
