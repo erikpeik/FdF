@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 17:45:20 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:41:57 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	tile_size(int keycode, t_vars *v)
 	if ((keycode == 1 || keycode == 115) && v->tile_h > 3)
 		v->tile_w -= 4;
 	v->tile_h = v->tile_w / 2;
-	v->z_ofs = (v->tile_h / 5);
+	v->z_ofs = v->tile_h;
 }
 
 static void	change_projection(int keycode, t_vars *v)
@@ -49,21 +49,27 @@ static void	change_altitude(int keycode, t_vars *v)
 	int		key;
 	double	range;
 
-	range = v->tile_w;
+	range = v->z_ofs / 2;
 	key = keycode;
 	if (key == 69 || key == 24 || key == 0xfe51 || key == 0xffab)
 	{
 		if (v->z_ofs2 * v->z_ofs > range || v->z_ofs2 * v->z_ofs < -range)
 			v->z_ofs2 += 0.1;
-		else
+		else if (v->z_ofs2 * v->z_ofs > range / 2 \
+			|| v->z_ofs2 * v->z_ofs < -range / 2)
 			v->z_ofs2 += 0.05;
+		else
+			v->z_ofs2 += 0.01;
 	}
 	else if (key == 78 || key == 27 || key == 43 || key == 0xffad)
 	{
 		if (v->z_ofs2 * v->z_ofs > range || v->z_ofs2 * v->z_ofs < -range)
 			v->z_ofs2 -= 0.1;
-		else
+		else if (v->z_ofs2 * v->z_ofs > range / 2 \
+			|| v->z_ofs2 * v->z_ofs < -range / 2)
 			v->z_ofs2 -= 0.05;
+		else
+			v->z_ofs2 -= 0.01;
 	}
 }
 

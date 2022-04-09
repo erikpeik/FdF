@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 20:24:37 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:25:42 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static t_vars	set_vars(char *argv, int fd)
 	v.row_count = 0;
 	v.col_count = 0;
 	read_values(fd, argv, &v);
-	v.tile_w = 100;
+	v.tile_w = 80;
 	v.tile_h = v.tile_w / 2;
 	v.x_ofs = W_WIDTH / 2;
-	v.y_ofs = 100;
-	v.z_ofs = v.tile_h / 5;
+	v.y_ofs = W_HEIGHT / 4;
+	v.z_ofs = v.tile_h;
 	v.z_ofs2 = 1;
 	v.projection = 1;
 	return (v);
