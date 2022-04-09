@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:33:14 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 23:41:57 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:48:17 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ static void	change_altitude(int keycode, t_vars *v)
 	if (key == 69 || key == 24 || key == 0xfe51 || key == 0xffab)
 	{
 		if (v->z_ofs2 * v->z_ofs > range || v->z_ofs2 * v->z_ofs < -range)
-			v->z_ofs2 += 0.1;
+			v->z_ofs2 += 0.03;
 		else if (v->z_ofs2 * v->z_ofs > range / 2 \
 			|| v->z_ofs2 * v->z_ofs < -range / 2)
-			v->z_ofs2 += 0.05;
+			v->z_ofs2 += 0.02;
 		else
 			v->z_ofs2 += 0.01;
 	}
 	else if (key == 78 || key == 27 || key == 43 || key == 0xffad)
 	{
 		if (v->z_ofs2 * v->z_ofs > range || v->z_ofs2 * v->z_ofs < -range)
-			v->z_ofs2 -= 0.1;
+			v->z_ofs2 -= 0.03;
 		else if (v->z_ofs2 * v->z_ofs > range / 2 \
 			|| v->z_ofs2 * v->z_ofs < -range / 2)
-			v->z_ofs2 -= 0.05;
+			v->z_ofs2 -= 0.02;
 		else
 			v->z_ofs2 -= 0.01;
 	}

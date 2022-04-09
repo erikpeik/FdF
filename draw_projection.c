@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:37:34 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 22:59:29 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 23:46:20 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static void	set_line(t_vars *v, int x, int y)
 	}
 	if (v->projection == 2)
 	{
-		v->line.x0 = (v->x_ofs - (W_WIDTH / 4)) + ((int)((v->tile_w / 2) * x));
+		v->line.x0 = (v->x_ofs - (W_WIDTH / 5)) + ((int)((v->tile_w / 2) * x));
 		v->line.y0 = v->y_ofs + ((int)(v->tile_h * y));
 		v->line.x1 = v->line.x0 + ((int)(v->tile_w / 2));
 		v->line.y1 = v->y_ofs + ((int)(v->tile_h * y));
 	}
 	if (v->projection == 3)
 	{
-		v->line.x0 = (v->x_ofs - (W_WIDTH / 4)) + ((int)((v->tile_w / 2) * x));
+		v->line.x0 = (v->x_ofs - (W_WIDTH / 5)) + ((int)((v->tile_w / 2) * x));
 		v->line.y0 = (v->y_ofs + 300) \
 			- ((int)((v->arr[y][x] * v->z_ofs) * v->z_ofs2));
 		v->line.x1 = v->line.x0 + ((int)(v->tile_w / 2));
