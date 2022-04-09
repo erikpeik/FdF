@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 20:26:51 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 19:26:40 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:43:12 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	projection(t_vars *v);
 void	refresh(t_vars *v);
 void	initilize_colors(t_vars *v);
 void	change_colortheme(int keycode, t_vars *v);
+int		upd_col(int point1, int point2, t_vars *v);
 
 int		free_intarr(int ***split, int length);
 int		free_strarr(char ***split);
