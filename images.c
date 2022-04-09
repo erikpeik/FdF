@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:12:27 by emende            #+#    #+#             */
-/*   Updated: 2022/04/09 17:26:11 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:03:35 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	clear_image(t_vars *v)
 		col = 0;
 		while (col < W_WIDTH)
 		{
-			ft_mlx_pixel_put(&v->data, col, row, v->colormode[v->light_switch]);
+			v->color = v->colormode[v->light_switch];
+			ft_mlx_pixel_put(v, col, row);
 			col++;
 		}
 		row++;
