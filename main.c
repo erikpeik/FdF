@@ -6,7 +6,7 @@
 /*   By: emende <emende@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:36:24 by emende            #+#    #+#             */
-/*   Updated: 2022/04/08 15:17:41 by emende           ###   ########.fr       */
+/*   Updated: 2022/04/09 13:45:29 by emende           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	v = set_vars(argv[1], fd);
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);
 	refresh(v);
-	mlx_hook(v->win_ptr, 2, 0, hook_key, v);
+	mlx_hook(v->win_ptr, 2, 1L << 0, hook_key, v);
 	mlx_loop(v->mlx_ptr);
 	return (0);
 }
