@@ -14,7 +14,7 @@ FdF offers to visualize “iron wire” meshing in 3D. Using MinilibX graphic li
   - libmlx.a in /usr/local/lib
   - mlx.h in /usr/local/include
 ### How to use FdF
-- First clone repo: `git clone git@github.com:erikpeik/FdF.git`
+- First clone repo: `git clone https://github.com/erikpeik/FdF.git`
 - In the folder run `make`, it should compaile if MinilibX is installed correctly.
 - You will have executable named `fdf`. 
 - For example you can run `./fdf eval_tests/42.fdf`. 
